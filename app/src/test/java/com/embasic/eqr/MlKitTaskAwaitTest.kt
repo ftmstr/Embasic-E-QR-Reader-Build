@@ -1,6 +1,7 @@
 package com.embasic.eqr
 
 import com.embasic.eqr.core.scan.awaitResult
+import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.TaskCompletionSource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -47,10 +48,11 @@ class MlKitTaskAwaitTest {
 
     @Test
     fun sdkTaskCancellationCannotLeaveAwaitSuspended() = runBlocking {
-        val source = TaskCompletionSource<String>()
+        val cancellation = CancellationTokenSource()
+        val source = TaskCompletionSource<String>(cancellation.token)
         launch {
             delay(10)
-            source.trySetCanceled()
+            cancellation.cancel()
         }
         try {
             withTimeout(2_000) { source.task.awaitResult() }
