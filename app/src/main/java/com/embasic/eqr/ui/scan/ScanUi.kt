@@ -556,7 +556,7 @@ private fun CameraPane(
             factory = {
                 PreviewView(it).apply {
                     scaleType = PreviewView.ScaleType.FILL_CENTER
-                    controller = controller
+                    this.controller = controller
                 }
             },
         )
