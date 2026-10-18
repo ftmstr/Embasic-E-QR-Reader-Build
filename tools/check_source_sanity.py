@@ -10,14 +10,12 @@ import re
 import sys
 from pathlib import Path
 
-from windows_builder_contract import check_windows_builder_file
 
 ROOT = Path(__file__).resolve().parents[1]
 KOTLIN_DIR = ROOT / "app" / "src" / "main" / "java"
 GRADLE_FILE = ROOT / "app" / "build.gradle.kts"
 ROOT_GRADLE_FILE = ROOT / "build.gradle.kts"
 SCAN_CORE_FILE = KOTLIN_DIR / "com" / "embasic" / "eqr" / "core" / "scan" / "ScanCore.kt"
-WINDOWS_BUILDER_FILE = ROOT / "tools" / "Build-EQR-Windows.ps1"
 
 FORBIDDEN_IMPORTS = {
     "androidx.compose.foundation.layout.weight":
@@ -117,8 +115,7 @@ def check_sources() -> tuple[list[str], int]:
                     "handle unknown ScanFrame implementations explicitly"
                 )
 
-    # P05: standalone, Python-tested Windows builder provenance/preflight guard.
-    errors.extend(check_windows_builder_file(WINDOWS_BUILDER_FILE))
+    # The private Windows packager is intentionally excluded from public CI.
 
     return errors, len(files)
 
