@@ -16,12 +16,12 @@ val testFixedBannerId = "ca-app-pub-3940256099942544/6300978111"
 
 android {
     namespace = "com.embasic.eqr"
-    compileSdk = 37
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.embasic.eqr"
         minSdk = 24
-        targetSdk = 37
+        targetSdk = 36
         versionCode = 1
         versionName = "0.1.0-dev"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
